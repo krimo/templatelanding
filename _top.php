@@ -58,9 +58,7 @@
 					<div class="span7">
 						<a href="index.php" class="home-link">
 							<div class="hgroup">
-								<div class="header">
-									<h1>Le comparateur d'assurance lorem</h1>
-								</div>								
+								<h1>Le comparateur d'assurance lorem</h1>
 								<span class="label label-info">Gratuit, rapide &amp; sans engagement</span>
 							</div>	
 						</a>
@@ -75,3 +73,5 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="container">

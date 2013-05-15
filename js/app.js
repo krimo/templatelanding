@@ -1,6 +1,6 @@
 function get_insee(zipCode) {
 	$.ajax({
-		url: '/liste-insee.php',
+		url: 'liste-insee.php',
 		type: 'POST',
 		cache: false,
 		data: "cp="+zipCode,
@@ -16,67 +16,76 @@ function get_insee(zipCode) {
 					optionArray.push("<option value="+k+">"+v+"</option>");
 				});
 			}
-			$("#insee").html(optionArray.join(" "));	
+			$("#insee").html(optionArray.join(" ")).parents(".insee-holder").css("opacity", 1);	
 		},
 		error: function (d, r, obj) {
-			console.log("erreur : "+r+", "+d+", "+obj);
+			console.log("error : "+r+", "+d+", "+obj);
 		}
 	});	
+}
+
+function scroll_to_top() {
+	$("html, body").animate({ scrollTop: 0 }, "fast");
 }
 
 $(document).ready(function() {
 
 	var theFormCookie = $.cookie('form'), 
-		theForm = $("form");
+		theForm = $("form"),
+		inseeHolder = $(".insee-holder");
 
 	$('.step1').siblings().hide(); // hide all except step 1
 
+	$("#zip-code").on('blur', function() {
+		get_insee($(this).val());
+	});
+
 	$(".date-input").each(function() {
 		var theDateField = $(this);
-		theDateField.on('keyup', function() {
-			if (theDateField.val().length == theDateField[0].maxLength) {
-				if (theDateField.val().length == 4) {
-					theDateField.blur();
-				} else {
-					theDateField.next('.date-input').focus();
+		theDateField.on({
+			keyup: function() {		
+				if (theDateField.val().length == theDateField[0].size) {
+					if (theDateField.val().length == 4) {
+						theDateField.blur();
+					} else {
+						theDateField.next('.date-input').focus();
+					}
 				}
+			},
+			blur: function() {
+				theDateField.parsley('validate');
 			}
 		});
 	});
 
-	$("#zip-code").on("blur", function() {
-		get_insee($(this).val());
-	});
+	$("button[class$=-btn]").click(function(){
 
-	$('#continue-btn').click(function(){
+		var validFields = [],
+			currentFieldset = $(this).parent("fieldset"),
+			clickedButton = $(this);
 
-		var validFields = [];
+		if ($("#zip-code").val().length == 5 && $("#insee").val()) {
+			get_insee($("#zip-code").val());
+		}
 
-		$(".step1").find("input, select").not("[type=hidden]").each(function() {		
+		currentFieldset.find("input, select").not("[type=hidden]").each(function(k,v) {
 			$(this).parsley('validate');
-			if (!$(this).parsley('isValid')) {
-				validFields.push(false);
-			} else {
+			if ($(this).parsley('isValid') === true || $(this).parsley('isValid') === null) {
 				validFields.push(true);
+			} else {
+				validFields.push(false);
 			}
 
 		});
 
 		if (validFields.indexOf(false) == -1) {
-			$(this).closest('.step').hide(0).next('.step').show(0);
-			$("html, body").animate({ scrollTop: 0 }, "fast");
+			if (clickedButton.is($(".continue-btn"))) {
+				clickedButton.closest('.form-step').hide(0).next('.form-step').show(0, scroll_to_top());
+			} else {
+				clickedButton.closest('.form-step').hide(0).prev('.form-step').show(0, scroll_to_top());
+			}			
 			validFields = [];
 		}
-
-		if ($("#zip-code").val().length == 5) {
-			get_insee($("#zip-code").val());
-		}
-	});
-
-	$('#back-btn').click(function(){
-		$(this).closest('.step').hide(0).prev('.step').show(0);
-		$("html, body").animate({ scrollTop: 0 }, "fast");
-		return false;
 	});
 
 	theForm.parsley({
@@ -89,6 +98,14 @@ $(document).ready(function() {
 			},
 			errorsWrapper: '<div></div>',
 			errorElem: '<p class="help-block"></p>'
+		},
+		validators: {
+			exactly: function(val, exactly) {
+				return val.length === exactly;
+			}
+		},
+		messages: {
+			exactly: "%s chiffres exactement."
 		}
 	});
 
@@ -98,6 +115,9 @@ $(document).ready(function() {
 
 	if (theFormCookie) {
 		theForm.formParams(theFormCookie);
+		if(theFormCookie.zip_code.length === 5) {
+			get_insee(theFormCookie.zip_code);
+		}
 	}
 
 	$('#twitter').sharrre({
