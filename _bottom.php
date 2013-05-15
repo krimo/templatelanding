@@ -26,7 +26,7 @@
 	<div class="footer-container">
 		<div class="container">
 			<footer class="row-fluid">
-				<p>&copy; <?=date("Y");?> templatelanding.com &mdash; <a href="#mentions-legales" data-toggle="modal">Mentions légales</a></p>
+				<p>&copy; <?=date("Y");?> templatelanding.com &mdash; <a href="#mentions-legales" data-toggle="modal">Mentions légales</a> &mdash; <a href="/blog">Blog</a></p>
 			</footer>
 		</div>
 	</div>
@@ -39,7 +39,11 @@
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="js/plugins.min.js"></script>
-	<script src="js/app.js"></script>
-
+	<script src="js/template.js"></script>
+	<script>
+		$(document).ready(function() {
+			// Specific page code here
+		});
+	</script>
 </body>
 </html>

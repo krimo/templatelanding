@@ -15,6 +15,8 @@
 	<meta property="og:title" content="templatelanding"/>
 	<meta property="og:url" content="http://templatelanding.com"/>
 	<meta property="og:site_name" content="templatelanding"/>
+
+	<link rel="author" href="https://plus.google.com/u/0/107251227605710810569">
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
