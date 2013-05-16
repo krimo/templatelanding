@@ -61,6 +61,11 @@ label, input, button, select, textarea {
 	text-align: center;
 }
 
+.header-container .other {
+	font-size: 1.7em;
+	font-weight: 700;
+}
+
 .header-container .row-fluid {position: relative;}
 
 .home-link { display: block; }
