@@ -78,29 +78,11 @@ label, input, button, select, textarea {
 
 .header-container h1 {
 	color: #fff;
-	font-size: 1.85em;
+	font-size: 2em;
 	font-weight: 300;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.8); 
-	line-height: .8;
+	line-height: 1.2;
 }
-
-.social-links {
-}
-
-.social-link {
-	width: 18%;
-	max-height: 24px;
-	float: right;
-	padding:.5em 0;
-	overflow: hidden;
-	-webkit-transition: all .3s;
-	-moz-transition: all .3s;
-	-ms-transition: all .3s;
-	-o-transition: all .3s;
-	transition: all .3s;	
-}
-
-.social-link.twitter {margin-left: -1em;}
 
 .hook { margin-bottom: 3em; }
 
@@ -173,22 +155,6 @@ span.step {
 
 .date-input {
 	text-align: center;
-}
-
-.animal-picker:before {
-	content: "\25BC";
-	color: #3a87ad;
-	position: relative;
-	left: -10px;
-	bottom: -5px;
-}
-
-.animal-picker:after {
-	content: "\25BC";
-	color: #3a87ad;
-	position: relative;
-	right: -10px;
-	bottom: -5px;
 }
 
 .hgroup { padding: 2em 0; }
@@ -437,6 +403,9 @@ span.step {
 
 @media (min-width: 768px) and (max-width: 979px) {}
 @media (min-width: 980px) {
+	.hgroup {
+		padding: 3em 0;
+	}
 	.seo-article {
 		-webkit-columns:2 3em;
 		-moz-columns:2 3em;

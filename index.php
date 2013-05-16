@@ -1,4 +1,4 @@
-<?php require_once("_top.php"); ?>
+<?php require_once("req/_top.php"); ?>
 	<div class="row-fluid">	
 		<!-- text outer container -->
 		<div class="span5">				
@@ -27,9 +27,9 @@
 		<div class="span7">
 			<div class="form-container">
 				<h2 class="hidden-phone">Calculez votre tarif gratuitement <br>et comparez !</h2>
-				<?php require_once("_form.php") ?>
+				<?php require_once("req/_form.php") ?>
 			</div>
 		</div>
 		<!-- END form outer container -->
 	</div>
-<?php require_once("_bottom.php"); ?>
+<?php require_once("req/_bottom.php"); ?>

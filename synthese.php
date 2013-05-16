@@ -1,6 +1,6 @@
 <?php 
 require_once("process.php");
-require_once("_top.php");
+require_once("req/_top.php");
 ?>
 
 	<div class="container">
@@ -21,4 +21,4 @@ require_once("_top.php");
 		</div>	
 	</div>
 
-<?php require_once("_bottom.php"); ?>
+<?php require_once("req/_bottom.php"); ?>

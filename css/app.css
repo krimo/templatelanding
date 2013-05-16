@@ -1,1 +1,11 @@
 @import url(template.css);
+
+/*******************************/
+/** Site specific styles here **/
+/*******************************/
+
+h1, h2, h3, h4, h5, h6, a, .lead-alt, .text-info {color:#3A87AD;}
+span.step, .label-info {background-color: #3A87AD;}
+.header-container {background-color: #C7C376;}
+footer a:hover {color: lightblue;}
+legend {border-color: #3A87AD;}

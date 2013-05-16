@@ -28,13 +28,13 @@ function scroll_to_top() {
 	$("html, body").animate({ scrollTop: 0 }, "fast");
 }
 
+var theFormCookie = $.cookie('form'), 
+	theForm = $("form"),
+	inseeHolder = $(".insee-holder");
+
 $(document).ready(function() {
 
-	var theFormCookie = $.cookie('form'), 
-		theForm = $("form"),
-		inseeHolder = $(".insee-holder");
-
-	$('.step1').siblings().hide(); // hide all except step 1
+	$('.form-step1').siblings().hide(); // hide all except step 1
 
 	$("#zip-code").on('blur', function() {
 		get_insee($(this).val());
