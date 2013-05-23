@@ -1,4 +1,4 @@
-function get_insee(zipCode) {
+function get_insee(zipCode, zipCodeId, inseeId) {
 	$.ajax({
 		url: 'liste-insee.php',
 		type: 'POST',
@@ -9,14 +9,14 @@ function get_insee(zipCode) {
 				theJsonData = $.parseJSON(data);
 
 			if (theJsonData.length === 0) {
-				$("#zip-code, #insee").parents(".control-group").removeClass("success").addClass("error");
+				$("#"+zipCodeId+", #"+inseeId).parents(".control-group").removeClass("success").addClass("error");
 				optionArray.push('<option value="">Code postal erronné</option>');
 			} else {
 				$.each(theJsonData, function(k,v) {
 					optionArray.push("<option value="+k+">"+v+"</option>");
 				});
 			}
-			$("#insee").html(optionArray.join(" ")).parents(".insee-holder").css("opacity", 1);	
+			$("#"+inseeId).html(optionArray.join(" ")).parents(".insee-holder").css("opacity", 1);	
 		},
 		error: function (d, r, obj) {
 			console.log("error : "+r+", "+d+", "+obj);
@@ -37,7 +37,7 @@ $(document).ready(function() {
 	$('.form-step1').siblings().hide(); // hide all except step 1
 
 	$("#zip-code").on('blur', function() {
-		get_insee($(this).val());
+		get_insee($(this).val(), $(this).attr("id"), "insee");
 	});
 
 	$(".date-input").each(function() {

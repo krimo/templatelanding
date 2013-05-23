@@ -40,17 +40,6 @@ label, input, button, select, textarea {
 	transition: all .5s;
 }
 
-.form-horizontal .control-label {
-	text-align: left;
-	min-width: 30%;
-}
-.form-horizontal .optin-label { min-width: 74%; }
-.form-horizontal label.radio.inline {
-	margin-left: 5px;
-}
-
-.step1 .form-horizontal .control-label {min-width: 51%;}
-
 .header-container {
 	background: #7e7e7e;
 	background-size: auto 100%;
@@ -91,7 +80,7 @@ label, input, button, select, textarea {
 
 .hook { margin-bottom: 3em; }
 
-.hook h1 {
+.hook h1, .table td {
 -ms-word-break: break-all;
      word-break: break-all;
 
@@ -411,6 +400,7 @@ span.step {
 	.hgroup {
 		padding: 3em 0;
 	}
+	
 	.seo-article {
 		-webkit-columns:2 3em;
 		-moz-columns:2 3em;
@@ -418,6 +408,19 @@ span.step {
 		-o-columns:2 3em;
 		columns:2 3em;
 	}
+
+	.form-horizontal .control-label {
+		text-align: left;
+		min-width: 30%;
+	}
+
+	.form-horizontal .optin-label { min-width: 74%; }
+	
+	.form-horizontal label.radio.inline {
+		margin-left: 5px;
+	}
+
+	.step1 .form-horizontal .control-label {min-width: 51%;}
 }
 @media (min-width: 1200px) {
 	.seo-article {
