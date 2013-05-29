@@ -1,20 +1,35 @@
 function get_insee(zipCode, zipCodeId, inseeId) {
 	$.ajax({
-		url: 'liste-insee.php',
+		url: 'curl_misterassur.php',
 		type: 'POST',
 		cache: false,
-		data: "cp="+zipCode,
-		success: function (data) {
-			var optionArray = [],
-				theJsonData = $.parseJSON(data);
+		data: "service=insee&zip_code="+zipCode,
+		success: function (data) {			
 
-			if (theJsonData.length === 0) {
+			var optionArray = [],
+				theJsonData = $.parseJSON(data).item,
+				key,
+				count = 0;
+
+			for (key in theJsonData) {
+				if(theJsonData.hasOwnProperty(key)) {
+					count++;
+				}
+			}
+
+			if ($.isEmptyObject(theJsonData)) {
 				$("#"+zipCodeId+", #"+inseeId).parents(".control-group").removeClass("success").addClass("error");
-				optionArray.push('<option value="">Code postal erronné</option>');
+				optionArray.push('<option value="">Code postal erroné</option>');
 			} else {
-				$.each(theJsonData, function(k,v) {
-					optionArray.push("<option value="+k+">"+v+"</option>");
-				});
+
+				if (count > 2) {
+					$.each(theJsonData, function(k,v) {
+						optionArray.push("<option value="+v.insee+">"+v.ville+"</option>");
+					});
+				} else {
+					optionArray.push("<option value="+theJsonData.insee+">"+theJsonData.ville+"</option>");
+				}
+
 			}
 			$("#"+inseeId).html(optionArray.join(" ")).parents(".insee-holder").css("opacity", 1);	
 		},

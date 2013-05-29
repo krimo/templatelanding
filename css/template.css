@@ -402,11 +402,11 @@ span.step {
 	}
 	
 	.seo-article {
-		-webkit-columns:2 3em;
-		-moz-columns:2 3em;
-		-ms-columns:2 3em;
-		-o-columns:2 3em;
-		columns:2 3em;
+		-webkit-columns:2;
+		-moz-columns:2;
+		-ms-columns:2;
+		-o-columns:2;
+		columns:2;
 	}
 
 	.form-horizontal .control-label {
@@ -424,10 +424,10 @@ span.step {
 }
 @media (min-width: 1200px) {
 	.seo-article {
-		-webkit-columns:3 3em;
-		-moz-columns:3 3em;
-		-ms-columns:3 3em;
-		-o-columns:3 3em;
-		columns:3 3em;
+		-webkit-columns:3;
+		-moz-columns:3;
+		-ms-columns:3;
+		-o-columns:3;
+		columns:3;
 	}
 }
