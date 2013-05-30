@@ -2,6 +2,12 @@ node-modules/
 Gruntfile.js
 package.json
 img/header-bg.psd
+vendor/
+composer.phar
+tpl/template-data.json
+composer.lock
+composer.json
+README.md
 
 # Compiled source #
 ###################

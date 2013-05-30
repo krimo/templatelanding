@@ -1,6 +1,6 @@
 function get_insee(zipCode, zipCodeId, inseeId) {
 	$.ajax({
-		url: 'curl_misterassur.php',
+		url: 'php/curl_misterassur.php',
 		type: 'POST',
 		cache: false,
 		data: "service=insee&zip_code="+zipCode,
@@ -48,6 +48,8 @@ var theFormCookie = $.cookie('form'),
 	inseeHolder = $(".insee-holder");
 
 $(document).ready(function() {
+
+	$("#fit-text-heading").fitText(1.2);
 
 	$('.form-step1').siblings().hide(); // hide all except step 1
 
@@ -163,6 +165,7 @@ $(document).ready(function() {
 		},		
 		enableHover: false,
 		enableTracking: true,
+		urlCurl: "php/sharrre.php",
 		click: function(api, options){
 			api.simulateClick();
 			api.openPopup('googlePlus');

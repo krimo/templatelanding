@@ -1,35 +1,28 @@
-<?php require_once("req/_top.php"); ?>
+<?php 
+	require_once 'vendor/autoload.php';
+
+	$loader = new Twig_Loader_Filesystem("tpl");
+	$twig = new Twig_Environment($loader);
+	$twig->addGlobal('CurrentYear', date("Y"));
+	$twig->addGlobal('OneMoreDayDay', date("d", strtotime("+1 days")));
+	$twig->addGlobal('OneMoreDayMonth', date("m", strtotime("+1 days")));
+	$twig->addGlobal('OneMoreDayYear', date("Y", strtotime("+1 days")));
+	$data = json_decode(file_get_contents("tpl/template-data.json"), true);
+
+	echo $twig->render('_top.twig', $data);
+?>
 	<div class="row-fluid">	
-		<!-- text outer container -->
+		<!-- aside -->
 		<div class="span5">				
-			<div class="hook">
-				<h1 class="hidden-desktop hidden-tablet">www.templatelanding.com</h1>
-				<p class="lead-alt">Les <strong>meilleurs tarifs</strong> accessibles en moins de <strong>deux minutes</strong> avec une gamme de formules sur-mesure.</p>
-				<img src="img/arrow-big.png" alt="" class="big-arrow hidden-phone">
-			</div>
-
-			<ul class="fill-steps unstyled">
-				<li class="fill-step"><span class="step">1</span>Je remplis ce formulaire <span class="text-info">en moins de deux minutes</span></li>
-				<li class="fill-step"><span class="step">2</span>J'affiche les tarifs et je compare les offres</li>
-			</ul>
-
-			<div class="thumbnail hidden-phone">
-				<img src="img/animaux.jpg" alt="Une femme et ses animaux de companie">
-				<div class="caption">							
-					<h3>Lorem Ipsum Sit</h3>
-					<h4 class="muted">Dolor sit amet</h4>
-				</div>
-			</div>
+			<?=$twig->render('_aside.twig', $data);?>
 		</div>
-		<!-- END text outer container -->
+		<!-- END aside -->
 
-		<!-- form outer container -->
+		<!-- form -->
 		<div class="span7">
-			<div class="form-container">
-				<h2 class="hidden-phone">Calculez votre tarif gratuitement <br>et comparez !</h2>
-				<?php require_once("req/_form.php") ?>
-			</div>
+			<?=$twig->render('_form.twig', $data);?>
 		</div>
-		<!-- END form outer container -->
+		<!-- END form -->
 	</div>
-<?php require_once("req/_bottom.php"); ?>
+<?=$twig->render('_seo_article.twig', $data);?>
+<?=$twig->render('_bottom.twig', $data);?>

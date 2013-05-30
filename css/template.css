@@ -80,7 +80,7 @@ label, input, button, select, textarea {
 
 .hook { margin-bottom: 3em; }
 
-.hook h1, .table td {
+.table td {
 -ms-word-break: break-all;
      word-break: break-all;
 
@@ -143,7 +143,7 @@ span.step {
 }
 
 .form-container > h2 {
-	padding:1em 0;
+	padding:1em 2.5em;
 	text-align: center;
 }
 
@@ -298,7 +298,9 @@ span.step {
 	box-shadow: 0 1px 4px #DDDDDD, 0 1px 0 #929292 inset;
 }
 
-@media (max-width: 767px) { .body {text-align: center;} }
+@media (max-width: 767px) { 
+	.body {text-align: center;} 
+}
 @media (min-width: 768px) { 
 	.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:1s;-moz-animation-duration:1s;-ms-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;}.animated.hinge{-webkit-animation-duration:2s;-moz-animation-duration:2s;-ms-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s;}@-webkit-keyframes wobble {
 	  0% { -webkit-transform: translateX(0%); } 15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
