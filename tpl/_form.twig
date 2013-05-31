@@ -1,6 +1,9 @@
 <div class="form-container">
 	<h2 class="hidden-phone">{{form_h2}}</h2>
 	<form action="synthese.php" method="post" novalidate>
+
+		<input type="hidden" name="code_apporteur" value="{{CodeApporteur|default(default_code_apporteur)}}">
+
 		<fieldset class="form-step form-step1">
 			<legend><span class="step">1</span> {{form_legend.step1}}</legend>
 			

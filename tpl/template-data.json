@@ -18,5 +18,6 @@
 		"step2" : "Deuxième étape"
 	},
 	"aside_img_alt": "Une femme et ses animaux de compagnie",
-	"form_h2": "Calculez votre tarif gratuitement et comparez !"
+	"form_h2": "Calculez votre tarif gratuitement et comparez !",
+	"default_code_apporteur": "XXXXXX"
 }
