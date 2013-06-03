@@ -23,7 +23,11 @@ switch ($_POST["service"]) {
         break;
 }
 
-echo json_encode(curl_post($url, $postArray));
+if ($_POST["service"] == "insee") {
+    echo json_encode(simplexml_load_string(curl_post($url, $postArray)));
+} else {
+    echo curl_post($url, $postArray);
+}
 
 /** 
  * Send a POST requst using cURL 
@@ -51,5 +55,5 @@ function curl_post($url, array $post = NULL, array $options = array()) {
         trigger_error(curl_error($ch)); 
     } 
     curl_close($ch); 
-    return simplexml_load_string($result); 
+    return $result; 
 }
