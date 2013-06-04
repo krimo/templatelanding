@@ -81,8 +81,8 @@ $(document).ready(function() {
 			currentFieldset = $(this).parent("fieldset"),
 			clickedButton = $(this);
 
-		if ($("#zip-code").val().length == 5 && $("#insee").val()) {
-			get_insee($("#zip-code").val());
+		if ($("#zip-code").val().length == 5) {
+			get_insee($("#zip-code").val(), "zip-code", "insee");
 		}
 
 		currentFieldset.find("input, select").not("[type=hidden]").each(function(k,v) {
