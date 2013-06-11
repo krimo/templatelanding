@@ -1,3 +1,15 @@
+// Fix index of array in <=IE8
+if(!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(needle) {
+        for(var i = 0; i < this.length; i++) {
+            if(this[i] === needle) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
+
 function get_insee(zipCode, zipCodeId, inseeId) {
 	$.ajax({
 		url: 'php/curl_misterassur.php',
@@ -31,7 +43,8 @@ function get_insee(zipCode, zipCodeId, inseeId) {
 				}
 
 			}
-			$("#"+inseeId).html(optionArray.join(" ")).parents(".insee-holder").css("opacity", 1);	
+			$("#"+inseeId).html(optionArray.join(" "));
+			$(".insee-holder").css("opacity", 1);	
 		},
 		error: function (d, r, obj) {
 			console.log("error : "+r+", "+d+", "+obj);
@@ -55,6 +68,10 @@ $(document).ready(function() {
 
 	$("#zip-code").on('blur', function() {
 		get_insee($(this).val(), $(this).attr("id"), "insee");
+	});
+
+	$("#owner-phone").on('blur', function() {
+		invalidPhone($(this).val());
 	});
 
 	$(".date-input").each(function() {
@@ -85,7 +102,7 @@ $(document).ready(function() {
 			get_insee($("#zip-code").val(), "zip-code", "insee");
 		}
 
-		currentFieldset.find("input, select").not("[type=hidden]").each(function(k,v) {
+		currentFieldset.find("input:visible, select:visible").each(function(k,v) {
 			$(this).parsley('validate');
 			if ($(this).parsley('isValid') === true || $(this).parsley('isValid') === null) {
 				validFields.push(true);
@@ -95,14 +112,14 @@ $(document).ready(function() {
 
 		});
 
-		if (validFields.indexOf(false) == -1) {
-			if (clickedButton.is($(".continue-btn"))) {
-				clickedButton.closest('.form-step').hide(0).next('.form-step').show(0, scroll_to_top());
-			} else {
-				clickedButton.closest('.form-step').hide(0).prev('.form-step').show(0, scroll_to_top());
-			}			
+		if (clickedButton.is($(".continue-btn")) && validFields.indexOf(false) == -1) {
+			clickedButton.closest('.form-step').hide(0).next('.form-step').show(0, scroll_to_top());
 			validFields = [];
+		} else {
+			clickedButton.closest('.form-step').hide(0).prev('.form-step').show(0, scroll_to_top());
 		}
+
+		
 	});
 
 	theForm.parsley({
@@ -119,10 +136,29 @@ $(document).ready(function() {
 		validators: {
 			exactly: function(val, exactly) {
 				return val.length === exactly;
+			},
+			msphone: function(val, msphone) {			
+				var invalidPhones = ["0000000000", "0123456789", "0101010101", "0100000000", "0200000000", "0300000000", "0400000000", "0500000000", "0600000000", "0700000000", "0800000000", "0900000000"];
+				if (val.match(/^00/) || invalidPhones.indexOf(val) > -1) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 		},
 		messages: {
-			exactly: "%s chiffres exactement."
+			exactly: "%s chiffres exactement.",
+			msphone: "Téléphone invalide"
+		},
+		listeners: {
+			onFormSubmit: function ( isFormValid, event, ParsleyForm ) {
+				if (isFormValid) {
+					$("button[type=submit]").prop("disabled", true);
+				}
+			},
+			onFieldError: function (elem, constraints, ParsleyField) {
+				console.log(elem);
+			}
 		}
 	});
 

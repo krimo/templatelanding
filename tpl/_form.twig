@@ -28,7 +28,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="span5">
+				<div class="span3">
 					<div class="control-group">
 						<label class="control-label" for="owner-surname">Votre prénom :</label>
 						<div class="controls">
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="span5">
+				<div class="span3">
 					<div class="control-group">
 						<label class="control-label" for="owner-name">Votre nom :</label>
 						<div class="controls">			
@@ -44,62 +44,58 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="control-group">
-				<label class="control-label" for="owner-address">Votre adresse :</label>
-				<div class="controls">
-					<input type="text" name="owner_address" class="input-block-level" id="owner-address" required>
-				</div>
-			</div>
-
-			<div class="row-fluid zebra zebra-margin">
-				<div class="span3">										
+				<div class="span4">					
 					<div class="control-group">
-						<label class="control-label" for="zip-code">Code postal :</label>
+						<label class="control-label" for="owner-birthday">Date de naissance</label>
 						<div class="controls">
-							<input type="text" name="zip_code" class="input-block-level span6" id="zip-code" data-exactly="5" required>
+							<div class="row-fluid">
+								<input type="text" name="obirthday_day" id="obirthday-day" class="span3 date-input" size="2" data-range="[1, 31]" placeholder="Jour" required>
+								<input type="text" name="obirthday_month" id="obirthday-month" class="span3 date-input" size="2" data-range="[1, 12]" placeholder="Mois" required>
+								<input type="text" name="obirthday_year" id="obirthday-year" class="span4 date-input" size="4" data-range="[1931, 1999]" placeholder="Année" required>
+							</div>	
 						</div>
 					</div>
 				</div>
-				<div class="span9">										
-					<div class="control-group insee-holder">
-						<label class="control-label" for="insee">Ville :</label>
-						<div class="controls">
-							<select type="text" name="insee" class="input-block-level" id="insee" required></select>
-						</div>
-					</div>										
-				</div>
-			</div>
-			<div class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label" for="owner-birthday">Date de naissance :</label>
-					<div class="controls">
-						<div class="row-fluid">
-							<input type="text" name="obirthday_day" id="obirthday-day" class="span2 date-input" size="2" data-range="[1, 31]" placeholder="Jour" required>
-							<input type="text" name="obirthday_month" id="obirthday-month" class="span2 date-input" size="2" data-range="[1, 12]" placeholder="Mois" required>
-							<input type="text" name="obirthday_year" id="obirthday-year" class="span3 date-input" size="4" data-range="[1931, 1999]" placeholder="Année" required>
-						</div>	
-					</div>
-				</div>
-				<div class="control-group zebra">
-					<label class="control-label" for="owner-phone">Votre n° de téléphone :</label>
-					<div class="controls">
-						<input type="tel" name="owner_phone" id="owner-phone" class="span5" pattern="[0-9]{10}" maxlength="10" required>
-					</div>
-				</div>	
 			</div>
 
 			<div class="row-fluid">
 				<div class="span6">
 					<div class="control-group">
-						<label class="control-label" for="owner-email">Votre e-mail :</label>
+						<label class="control-label" for="owner-address">Adresse</label>
 						<div class="controls">
-							<input type="email" name="owner_email" id="owner-email" class="input-block-level" placeholder="votre-email@example.fr" required>
+							<input type="text" name="owner_address" class="input-block-level" id="owner-address" required>
+						</div>
+					</div>
+				</div>
+				<div class="span6">										
+					<div class="control-group">
+						<label class="control-label" for="zip-code">Code postal</label>
+						<div class="controls">
+							<input type="text" name="zip_code" class="span3" id="zip-code" data-exactly="5" required>					
+							<select type="text" name="insee" class="insee-holder" id="insee" required></select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row-fluid zebra zebra-margin">
+				<div class="span3">				
+					<div class="control-group">
+						<label class="control-label" for="owner-phone">Téléphone</label>
+						<div class="controls">
+							<input type="tel" name="owner_phone" id="owner-phone" class="input-block-level" pattern="[0-9]{10}" maxlength="10" data-msphone="" required>
+						</div>
+					</div>	
+				</div>
+				<div class="span4">
+					<div class="control-group">
+						<label class="control-label" for="owner-email">E-mail</label>
+						<div class="controls">
+							<input type="email" name="owner_email" id="owner-email" class="input-block-level" placeholder="votre-email@exemple.fr" required>
 						</div>
 					</div>										
 				</div>
-				<div class="span6">
+				<div class="span5">
 					<div class="control-group">
 						<label class="control-label" for="contract-start-date">Date d'effet du contrat souhaitée :</label>
 						<div class="controls">
@@ -112,18 +108,17 @@
 					</div>										
 				</div>
 			</div>
-
-			<div class="control-group zebra">
-				<label for="contract-type" class="control-label">Type de formule souhaitée :</label>
-				<div class="controls">
-					<label class="radio inline"><input type="radio" name="contract_type" checked> Basique</label>
-					<label class="radio inline"><input type="radio" name="contract_type"> Sérénité</label>
-					<label class="radio inline"><input type="radio" name="contract_type"> Premium</label>
-				</div>
-			</div>
 					
-			<div class="form-horizontal">		
-				<div class="control-group margin-cindy">
+			<div class="form-horizontal">	
+				<div class="control-group">
+					<label for="contract-type" class="control-label">Type de formule souhaitée :</label>
+					<div class="controls">
+						<label class="radio inline"><input type="radio" name="contract_type" checked> Basique</label>
+						<label class="radio inline"><input type="radio" name="contract_type"> Sérénité</label>
+						<label class="radio inline"><input type="radio" name="contract_type"> Premium</label>
+					</div>
+				</div>	
+				<div class="control-group">
 					<label class="control-label optin-label">Souhaitez-vous bénéficier des meilleures offres de nos partenaires ?</label>
 					<div class="controls">
 						<label class="radio inline">
