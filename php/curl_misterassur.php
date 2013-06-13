@@ -30,7 +30,7 @@ if ($_POST["service"] == "insee") {
 }
 
 /** 
- * Send a POST requst using cURL 
+ * Send a POST request using cURL 
  * @param string $url to request 
  * @param array $post values to send 
  * @param array $options for cURL 
