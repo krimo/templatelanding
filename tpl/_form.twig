@@ -71,8 +71,14 @@
 					<div class="control-group">
 						<label class="control-label" for="zip-code">Code postal</label>
 						<div class="controls">
-							<input type="text" name="zip_code" class="span3" id="zip-code" data-exactly="5" required>					
-							<select type="text" name="insee" class="insee-holder" id="insee" required></select>
+							<div class="row-fluid">
+								<div class="span3">						
+									<input type="text" name="zip_code" class="input-block-level" id="zip-code" data-exactly="5" required>
+								</div>
+								<div class="span9">
+									<select type="text" name="insee" class="insee-holder input-block-level" id="insee"></select>									
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

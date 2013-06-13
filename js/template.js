@@ -102,24 +102,26 @@ $(document).ready(function() {
 			get_insee($("#zip-code").val(), "zip-code", "insee");
 		}
 
-		currentFieldset.find("input:visible, select:visible").each(function(k,v) {
-			$(this).parsley('validate');
-			if ($(this).parsley('isValid') === true || $(this).parsley('isValid') === null) {
-				validFields.push(true);
-			} else {
-				validFields.push(false);
+		if (clickedButton.is($(".continue-btn"))) {
+
+			currentFieldset.find("input:visible, select:visible").each(function(k,v) {
+				$(this).parsley('validate');
+				if ($(this).parsley('isValid') === true || $(this).parsley('isValid') === null) {
+					validFields.push(true);
+				} else {
+					validFields.push(false);
+				}
+
+			});
+
+			if (validFields.indexOf(false) == -1) {				
+				clickedButton.closest('.form-step').hide(0).next('.form-step').show(0, scroll_to_top());
+				validFields = [];
 			}
 
-		});
-
-		if (clickedButton.is($(".continue-btn")) && validFields.indexOf(false) == -1) {
-			clickedButton.closest('.form-step').hide(0).next('.form-step').show(0, scroll_to_top());
-			validFields = [];
 		} else {
 			clickedButton.closest('.form-step').hide(0).prev('.form-step').show(0, scroll_to_top());
-		}
-
-		
+		}		
 	});
 
 	theForm.parsley({
@@ -148,13 +150,19 @@ $(document).ready(function() {
 		},
 		messages: {
 			exactly: "%s chiffres exactement.",
-			msphone: "Téléphone invalide"
+			msphone: "Téléphone invalide."
 		},
 		listeners: {
 			onFormSubmit: function ( isFormValid, event, ParsleyForm ) {
 				if (isFormValid) {
 					$("button[type=submit]").prop("disabled", true);
 				}
+			},
+			onFieldValidate: function(e) {
+				if (!$(e).is(':visible')) {
+					return true
+				}
+				return false;
 			},
 			onFieldError: function (elem, constraints, ParsleyField) {
 				console.log(elem);
