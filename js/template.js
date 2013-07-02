@@ -10,86 +10,70 @@ if(!Array.prototype.indexOf) {
     };
 }
 
-function get_insee(zipCode, zipCodeId, inseeId) {
-	$.ajax({
-		url: 'php/curl_misterassur.php',
-		type: 'POST',
-		cache: false,
-		data: "service=insee&zip_code="+zipCode,
-		success: function (data) {			
+jQuery.noConflict();
 
-			var optionArray = [],
-				theJsonData = $.parseJSON(data).item,
-				key,
-				count = 0;
+jQuery(document).ready(function($) {
 
-			for (key in theJsonData) {
-				if(theJsonData.hasOwnProperty(key)) {
-					count++;
+	function get_insee(zipCode, zipCodeId, inseeId) {
+		$.ajax({
+			url: 'php/curl_misterassur.php',
+			type: 'POST',
+			cache: false,
+			data: "service=insee&zip_code="+zipCode,
+			success: function (data) {			
+
+				var optionArray = [],
+					theJsonData = $.parseJSON(data).item,
+					key,
+					count = 0;
+
+				for (key in theJsonData) {
+					if(theJsonData.hasOwnProperty(key)) {
+						count++;
+					}
 				}
-			}
 
-			if ($.isEmptyObject(theJsonData)) {
-				$("#"+zipCodeId+", #"+inseeId).parents(".control-group").removeClass("success").addClass("error");
-				optionArray.push('<option value="">Code postal erroné</option>');
-			} else {
-
-				if (count > 2) {
-					$.each(theJsonData, function(k,v) {
-						optionArray.push("<option value="+v.insee+">"+v.ville+"</option>");
-					});
+				if ($.isEmptyObject(theJsonData)) {
+					$("#"+zipCodeId+", #"+inseeId).parents(".control-group").removeClass("success").addClass("error");
+					optionArray.push('<option value="">Code postal erroné</option>');
 				} else {
-					optionArray.push("<option value="+theJsonData.insee+">"+theJsonData.ville+"</option>");
+
+					if (count > 2) {
+						$.each(theJsonData, function(k,v) {
+							optionArray.push("<option value="+v.insee+">"+v.ville+"</option>");
+						});
+					} else {
+						optionArray.push("<option value="+theJsonData.insee+">"+theJsonData.ville+"</option>");
+					}
+
 				}
-
+				$("#"+inseeId).html(optionArray.join(" "));
+				$(".insee-holder").css("opacity", 1);	
+			},
+			error: function (d, r, obj) {
+				console.log("error : "+r+", "+d+", "+obj);
 			}
-			$("#"+inseeId).html(optionArray.join(" "));
-			$(".insee-holder").css("opacity", 1);	
-		},
-		error: function (d, r, obj) {
-			console.log("error : "+r+", "+d+", "+obj);
-		}
-	});	
-}
+		});	
+	}
 
-function scroll_to_top() {
-	$("html, body").animate({ scrollTop: 0 }, "fast");
-}
+	function scroll_to_top() {
+		$("html, body").animate({ scrollTop: 0 }, "fast");
+	}
 
-var theFormCookie = $.cookie('form'), 
-	theForm = $("form"),
-	inseeHolder = $(".insee-holder");
+	var theFormCookie = $.cookie('form'), 
+		theForm = $("form"),
+		inseeHolder = $(".insee-holder");
 
-$(document).ready(function() {
+	$("#fit-text-heading").fitText(1.4);
 
-	$("#fit-text-heading").fitText(1.2);
+	$('.datepicking').datepicker({
+		weekStart: 1
+	});
 
 	$('.form-step1').siblings().hide(); // hide all except step 1
 
 	$("#zip-code").on('blur', function() {
 		get_insee($(this).val(), $(this).attr("id"), "insee");
-	});
-
-	$("#owner-phone").on('blur', function() {
-		invalidPhone($(this).val());
-	});
-
-	$(".date-input").each(function() {
-		var theDateField = $(this);
-		theDateField.on({
-			keyup: function() {		
-				if (theDateField.val().length == theDateField[0].size) {
-					if (theDateField.val().length == 4) {
-						theDateField.blur();
-					} else {
-						theDateField.next('.date-input').focus();
-					}
-				}
-			},
-			blur: function() {
-				theDateField.parsley('validate');
-			}
-		});
 	});
 
 	$("button[class$=-btn]").click(function(){
@@ -146,11 +130,27 @@ $(document).ready(function() {
 				} else {
 					return true;
 				}
+			},
+			aftertoday: function(val, beforeToday) {
+				var today = new Date(),
+					valTemp = val.split("-"),
+					theDate = new Date(valTemp[1]+"-"+valTemp[0]+"-"+valTemp[2]);
+					
+				return today < theDate;
+			},
+			beforetoday: function(val, afterToday) {
+				var today = new Date(),
+					valTemp = val.split("-"),
+					theDate = new Date(valTemp[1]+"-"+valTemp[0]+"-"+valTemp[2]);
+					
+				return today > theDate;
 			}
 		},
 		messages: {
 			exactly: "%s chiffres exactement.",
-			msphone: "Téléphone invalide."
+			msphone: "Téléphone invalide.",
+			aftertoday: "Cette date doit être postérieure à aujourd'hui",
+			beforetoday: "Cette date doit être antérieure à aujourd'hui"
 		},
 		listeners: {
 			onFormSubmit: function ( isFormValid, event, ParsleyForm ) {

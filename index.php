@@ -5,9 +5,7 @@
 	$twig = new Twig_Environment($loader);
 
 	$twig->addGlobal('CurrentYear', date("Y"));
-	$twig->addGlobal('OneMoreDayDay', date("d", strtotime("+1 days")));
-	$twig->addGlobal('OneMoreDayMonth', date("m", strtotime("+1 days")));
-	$twig->addGlobal('OneMoreDayYear', date("Y", strtotime("+1 days")));
+	$twig->addGlobal('OneMoreDayDate', date("d-m-Y", strtotime("+1 days")));
 	$twig->addGlobal('CodeApporteur', $_GET["code"]);
 
 	$data = json_decode(file_get_contents("tpl/template-data.json"), true);

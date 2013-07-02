@@ -19,9 +19,9 @@
 			<div class="row-fluid zebra zebra-margin">
 				<div class="span2">
 					<div class="control-group">
-						<label class="control-label" for="owner-gender">Civilité :</label>
+						<label class="control-label" for="gender">Civilité :</label>
 						<div class="controls">
-							<select name="owner_gender" id="owner-gender" class="input-block-level">
+							<select name="gender" id="gender" class="input-block-level">
 								<option value="1">M.</option>
 								<option value="2" selected>Mme</option>
 							</select>
@@ -30,29 +30,25 @@
 				</div>
 				<div class="span3">
 					<div class="control-group">
-						<label class="control-label" for="owner-surname">Votre prénom :</label>
+						<label class="control-label" for="surname">Votre prénom :</label>
 						<div class="controls">
-							<input type="text" name="owner_surname" class="input-block-level" id="owner-surname" required>
+							<input type="text" name="surname" class="input-block-level" id="surname" required>
 						</div>
 					</div>
 				</div>
 				<div class="span3">
 					<div class="control-group">
-						<label class="control-label" for="owner-name">Votre nom :</label>
+						<label class="control-label" for="name">Votre nom :</label>
 						<div class="controls">			
-							<input type="text" name="owner_name" class="input-block-level" id="owner-name" required>
+							<input type="text" name="name" class="input-block-level" id="name" required>
 						</div>
 					</div>
 				</div>
 				<div class="span4">					
 					<div class="control-group">
-						<label class="control-label" for="owner-birthday">Date de naissance</label>
+						<label class="control-label" for="birthday">Date de naissance</label>
 						<div class="controls">
-							<div class="row-fluid">
-								<input type="text" name="obirthday_day" id="obirthday-day" class="span3 date-input" size="2" data-range="[1, 31]" placeholder="Jour" required>
-								<input type="text" name="obirthday_month" id="obirthday-month" class="span3 date-input" size="2" data-range="[1, 12]" placeholder="Mois" required>
-								<input type="text" name="obirthday_year" id="obirthday-year" class="span4 date-input" size="4" data-range="[1931, 1999]" placeholder="Année" required>
-							</div>	
+							<input class="span6 datepicking" type="text" name="birthday" id="birthday" data-date="10-11-1970" data-date-format="dd-mm-yyyy" data-date-viewmode="years" data-trigger="changeDate" data-beforetoday required>
 						</div>
 					</div>
 				</div>
@@ -61,9 +57,9 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<div class="control-group">
-						<label class="control-label" for="owner-address">Adresse</label>
+						<label class="control-label" for="address">Adresse</label>
 						<div class="controls">
-							<input type="text" name="owner_address" class="input-block-level" id="owner-address" required>
+							<input type="text" name="address" class="input-block-level" id="address" required>
 						</div>
 					</div>
 				</div>
@@ -87,17 +83,17 @@
 			<div class="row-fluid zebra zebra-margin">
 				<div class="span3">				
 					<div class="control-group">
-						<label class="control-label" for="owner-phone">Téléphone</label>
+						<label class="control-label" for="phone">Téléphone</label>
 						<div class="controls">
-							<input type="tel" name="owner_phone" id="owner-phone" class="input-block-level" pattern="[0-9]{10}" maxlength="10" data-msphone="" required>
+							<input type="tel" name="phone" id="phone" class="input-block-level" pattern="[0-9]{10}" maxlength="10" data-msphone required>
 						</div>
 					</div>	
 				</div>
 				<div class="span4">
 					<div class="control-group">
-						<label class="control-label" for="owner-email">E-mail</label>
+						<label class="control-label" for="email">E-mail</label>
 						<div class="controls">
-							<input type="email" name="owner_email" id="owner-email" class="input-block-level" placeholder="votre-email@exemple.fr" required>
+							<input type="email" name="email" id="email" class="input-block-level" placeholder="votre-email@exemple.fr" required>
 						</div>
 					</div>										
 				</div>
@@ -105,11 +101,7 @@
 					<div class="control-group">
 						<label class="control-label" for="contract-start-date">Date d'effet du contrat souhaitée :</label>
 						<div class="controls">
-							<div class="row-fluid">
-								<input type="text" name="csd_day" id="csd-day" class="span2 date-input" maxlength="2" data-range="[1, 31]" placeholder="Jour" value="{{OneMoreDayDay}}" required>
-								<input type="text" name="csd_month" id="csd-month" class="span2 date-input" maxlength="2" data-range="[1, 12]" placeholder="Mois" value="{{OneMoreDayMonth}}" required>
-								<input type="text" name="csd_year" id="csd-year" class="span3 date-input" maxlength="4" data-range="[2013, 2020]" placeholder="Année" value="{{OneMoreDayYear}}" required>
-							</div>	
+							<input class="span5 datepicking" type="text" value="{{OneMoreDayDate}}" name="contract_start_date" id="contract-start-date" data-date-format="dd-mm-yyyy" data-date="{{OneMoreDayDate}}" data-aftertoday data-trigger="changeDate" required>
 						</div>
 					</div>										
 				</div>
@@ -124,7 +116,7 @@
 						<label class="radio inline"><input type="radio" name="contract_type"> Premium</label>
 					</div>
 				</div>	
-				<div class="control-group">
+				<div class="control-group zebra">
 					<label class="control-label optin-label">Souhaitez-vous bénéficier des meilleures offres de nos partenaires ?</label>
 					<div class="controls">
 						<label class="radio inline">
