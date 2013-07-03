@@ -10,9 +10,15 @@ if(!Array.prototype.indexOf) {
     };
 }
 
+function getURLParameter(name) {
+    return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]);
+}
+
 jQuery.noConflict();
 
 jQuery(document).ready(function($) {
+
+	console.log(getURLParameter("code"));
 
 	function get_insee(zipCode, zipCodeId, inseeId) {
 		$.ajax({
@@ -192,6 +198,7 @@ jQuery(document).ready(function($) {
 			api.openPopup('twitter');
 		}
 	});
+
 	$('#facebook').sharrre({
 		share: {
 			facebook: true
@@ -203,6 +210,7 @@ jQuery(document).ready(function($) {
 			api.openPopup('facebook');
 		}
 	});
+
 	$('#googleplus').sharrre({
 		share: {
 			googlePlus: true
